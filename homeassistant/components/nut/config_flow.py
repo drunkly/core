@@ -64,7 +64,7 @@ async def validate_input(hass: core.HomeAssistant, data):
     if not (status := data.status):
         raise CannotConnect
 
-    return {"ups_list": data.ups_list, "available_resources": status}
+    return {"ups_list": data.ups_list, "available_resources": status, "commands": data.commands}
 
 
 def _format_host_port_alias(user_input):

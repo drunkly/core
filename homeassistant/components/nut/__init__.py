@@ -193,6 +193,7 @@ class PyNUTData:
         self.ups_list = None
         self._status = None
         self._device_info = None
+	self._commands = None
 
     @property
     def status(self):
@@ -208,6 +209,11 @@ class PyNUTData:
     def device_info(self):
         """Return the device info for the ups."""
         return self._device_info or {}
+
+    @property
+    def commands(self):
+        """Return available instant commands."""
+        return self._commands
 
     def _get_alias(self):
         """Get the ups alias from NUT."""
@@ -252,8 +258,20 @@ class PyNUTData:
             _LOGGER.debug("Error getting NUT vars for host %s: %s", self._host, err)
             return None
 
+    def _get_commands(self):
+        """Get the avaialbes instants commands from NUT."""
+        if self._alias is None:
+            self._alias = self._get_alias()
+
+        try:
+            return self._client.list_commands(self._alias)
+        except (PyNUTError, ConnectionResetError) as err:
+            _LOGGER.debug("Error getting NUT commands for host %s: %s", self._host, err)
+            return None
+
     def update(self):
         """Fetch the latest status from NUT."""
         self._status = self._get_status()
+        self._commands = self._get_commands()
         if self._device_info is None:
             self._device_info = self._get_device_info()

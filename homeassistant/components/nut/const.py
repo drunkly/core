@@ -9,6 +9,12 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
     SensorStateClass,
 )
+from homeassistant.components.sensor import (
+    SwitchDeviceClass,
+    SwitchEntityDescription,
+    SwitchStateClass,
+)
+
 from homeassistant.const import (
     ELECTRIC_CURRENT_AMPERE,
     ELECTRIC_POTENTIAL_VOLT,
@@ -593,3 +599,47 @@ STATE_TYPES = {
     "FSD": "Forced Shutdown",
     "ALARM": "Alarm",
 }
+
+SWITCH_TYPES: Final[dict[str, SwitchEntityDescription]] = {
+    "beeper.disable": SwitchEntityDescription(
+        key="beeper.disable",
+        name="Beeper Disable",
+        icon="mdi:information-outline",
+    ),
+    "beeper.enable": SwitchEntityDescription(
+        key="beeper.enable",
+        name="Beeper Enable",
+        icon="mdi:information-outline",
+    ),
+    "beeper.mute": SwitchEntityDescription(
+        key="beeper.mute",
+        name="Beeper Mute",
+        icon="mdi:information-outline",
+    ),
+    "beeper.off": SwitchEntityDescription(
+        key="beeper.off",
+        name="Beeper Off",
+        icon="mdi:information-outline",
+    ),
+    "beeper.on": SwitchEntityDescription(
+        key="beeper.on",
+        name="Beeper On",
+        icon="mdi:information-outline",
+    ),
+    "test.battery.start.deep": SwitchEntityDescription(
+        key="test.battery.start.deep",
+        name="Battery Deep Test",
+        icon="mdi:information-outline",
+    ),
+    "test.battery.start.quick": SwitchEntityDescription(
+        key="test.battery.start.quick",
+        name="Battery Quick Test",
+        icon="mdi:information-outline",
+    ),
+    "test.battery.stop": SwitchEntityDescription(
+        key="test.battery.stop",
+        name="Battery Stop Test",
+        icon="mdi:information-outline",
+    ),
+}
+
